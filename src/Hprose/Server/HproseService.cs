@@ -537,7 +537,7 @@ namespace Hprose.Server {
             if (OnSendError != null) {
                 OnSendError(e, context);
             }
-            string error = debugEnabled ? e.ToString(): e.Message;
+            string error = debugEnabled ? (e.InnerException??e).ToString(): (e.InnerException??e).Message;
 #if !dotNETMF
             MemoryStream data = new MemoryStream(4096);
             HproseWriter writer = new HproseWriter(data, mode, true);
